@@ -1,0 +1,45 @@
+{
+  "aspects.py": {
+    "source": "unified_eval.py",
+    "sha256": "416ce6fd2e86e98414fc9117df7897d1ff9fed7a7752e7441d3cf3f1ef97d230",
+    "adaptation": "Only the six Judge aspect definitions are retained.",
+    "local_sha256": "93bf0ff7f9541ab4b2eafb616b00154d3a89f9e64dc4ed8cb8efcf68b9ff9a92"
+  },
+  "judge_paperquiz.py": {
+    "source": "baseline_compare/__pycache__/eval_judge_paperquiz.cpython-310.pyc",
+    "sha256": "367ab1d1411721a018dfe5111a0678d2d060cdc76ce1575daf85a2cefc18e38e",
+    "adaptation": "Core metric functions restored as Python source; checked against cached reference functions. Judge aspects imported from aspects.py.",
+    "local_sha256": "d6fbe9e5ee153777f18237b6e49dc1c68ec3f86ee3d1ccfee7c6c310dd6b752f"
+  },
+  "judge_fill.py": {
+    "source": "baseline_compare/rerun_judge_fill_aspects.py",
+    "sha256": "72f5a6e772478b90e9c3ac04b76673c44a8589f1aa2c9ca40aeb8c7dffa963c2",
+    "adaptation": "Selected scoring functions copied verbatim; prompt paths relocated and Judge aspects imported from aspects.py.",
+    "local_sha256": "b62a1cc59b7cc4cd7687c4e7ab41feb5ae8403eed612ea1df8295a84feda3a03"
+  },
+  "verification": {
+    "status": "mocked-parity-checked",
+    "checks": [
+      "JPEG85 resizing",
+      "QA answer attachment",
+      "request message/max-token fields",
+      "density augmentation",
+      "Judge/PaperQuiz aggregation and retry behavior"
+    ],
+    "scope": "No hosted model calls; reference core request construction, parsing, scoring, and retry behavior checked with mocked responses. Release integration adaptations are listed separately below.",
+    "release_protocol_version": 5,
+    "regression_command": "python -m unittest tests.test_evaluation -v",
+    "historical_aggregation_check": {
+      "result_groups": 2,
+      "posters_per_group": 100,
+      "posters_with_partial_judge": [77, 68],
+      "matched_columns": "All six Judge aspects, three Judge means, and six PaperQuiz raw/adjusted columns match the original fill-aspects summary for each group.",
+      "scope": "Offline reaggregation of existing original records; no model requests or resampling."
+    },
+    "release_integration_adaptations": [
+      "Available Judge ratings are aggregated like the reference fill-aspects report, with independent completed PaperQuiz values and per-column denominators.",
+      "Original per-poster text_len_words_proxy or ocr_chars may be stored directly in portable manifests; explicit invalid/missing QA or OCR files fail before model requests.",
+      "Generation and independent evaluation reports share the same metric summary; incomplete scores retain diagnostic status."
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "text_model": {
+    "name": "deepseek-flash",
+    "base_url_env": "DEEPSEEK_BASE_URL",
+    "api_key_env": "DEEPSEEK_API_KEY",
+    "input_usd_per_million": null,
+    "output_usd_per_million": null,
+    "max_output_tokens": 6500,
+    "token_limit_field": "max_tokens",
+    "json_mode": true,
+    "timeout_seconds": 180,
+    "extra_body": {
+      "thinking": {
+        "type": "disabled"
+      }
+    }
+  },
+  "vision_model": {
+    "name": "deepseek-flash",
+    "base_url_env": "DEEPSEEK_BASE_URL",
+    "api_key_env": "DEEPSEEK_API_KEY",
+    "input_usd_per_million": null,
+    "output_usd_per_million": null,
+    "max_output_tokens": 16384,
+    "token_limit_field": "max_tokens",
+    "json_mode": true,
+    "timeout_seconds": 180,
+    "extra_body": {
+      "thinking": {
+        "type": "disabled"
+      }
+    }
+  },
+  "budget": {
+    "max_tokens": null,
+    "max_calls": 2,
+    "max_vlm_calls": 1,
+    "max_usd": null,
+    "content_fraction": 0.7,
+    "image_token_reservation": 8192
+  },
+  "evidence_selection": {
+    "max_figures": 3,
+    "max_candidates": 24,
+    "semantic_capacity": true
+  },
+  "layout": {
+    "width_inches": 48,
+    "height_inches": 36,
+    "columns": 3,
+    "margin_inches": 0.65,
+    "gap_inches": 0.55,
+    "body_font_pt": 42,
+    "minimum_font_pt": 24,
+    "minimum_image_dpi": 65,
+    "render_dpi": 96,
+    "renderer_timeout_seconds": 180,
+    "design": "editorial",
+    "editorial_flow": "columns"
+  },
+  "max_document_chars": 60000,
+  "benchmark_root": "benchmark",
+  "reference_root": "evaluation",
+  "output_root": "outputs",
+  "eval_max_tokens": 2000000,
+  "eval_max_calls": 400,
+  "eval_judge_prompt": "compact-fill",
+  "eval_quiz_limit": 50,
+  "eval_fill_attempts": 6
+}
